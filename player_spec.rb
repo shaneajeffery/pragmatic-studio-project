@@ -31,6 +31,10 @@ describe Player do
     expect(@player.health).to eq(140)
   end
 
+  it "is strong" do
+    expect(@player).to be_strong
+  end
+
   context 'created with a default health' do
     before do
       @player = Player.new('larry')
