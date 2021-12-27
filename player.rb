@@ -11,7 +11,7 @@ class Player
   end
 
   def to_s
-    "I'm #{@name} with a health of #{@health} and a score of #{score}."
+    "#{@name} | Health: #{@health} | Score: #{score}"
   end
 
   def strong?

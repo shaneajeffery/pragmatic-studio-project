@@ -16,7 +16,7 @@ describe Player do
   end
 
   it 'has a string representation' do
-    expect(@player.to_s).to eq("I'm Larry with a health of 150 and a score of 155.")
+    expect(@player.to_s).to eq('Larry | Health: 150 | Score: 155')
   end
 
   it 'increases health by 15 when w00ted' do
@@ -31,7 +31,7 @@ describe Player do
     expect(@player.health).to eq(140)
   end
 
-  it "is strong" do
+  it 'is strong' do
     expect(@player).to be_strong
   end
 
@@ -42,6 +42,20 @@ describe Player do
 
     it 'has health of 100' do
       expect(@player.health).to eq(100)
+    end
+  end
+
+  context 'in a collection of players' do
+    before do
+      @player1 = Player.new('moe', 100)
+      @player2 = Player.new('larry', 200)
+      @player3 = Player.new('curly', 300)
+
+      @players = [@player1, @player2, @player3]
+    end
+
+    it 'is sorted by decreasing score' do
+      expect(@players.sort_by { |p| -p.score }).to eq([@player3, @player2, @player1])
     end
   end
 end
