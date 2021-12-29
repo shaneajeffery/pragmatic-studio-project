@@ -3,7 +3,6 @@ require_relative 'player'
 require_relative 'die'
 
 describe Game do
-
   before do
     @initial_health = 150
     @game = Game.new('Knuckleheads')
@@ -18,7 +17,7 @@ describe Game do
     it 'w00ts the player if a high number is rolled' do
       # Newer rspec syntax for stubbing.
       Die.any_instance.stub(:roll).and_return(5)
-      @game.play(2)
+      @game.play(1)
 
       expect(@player.health).to eq(@initial_health + 15)
     end
@@ -26,7 +25,7 @@ describe Game do
     it 'skips the player if a medium number is rolled' do
       # Newer rspec syntax for stubbing.
       Die.any_instance.stub(:roll).and_return(3)
-      @game.play(2)
+      @game.play(1)
 
       expect(@player.health).to eq(@initial_health)
     end
@@ -34,10 +33,9 @@ describe Game do
     it 'blams the player if a low number is rolled' do
       # Newer rspec syntax for stubbing.
       Die.any_instance.stub(:roll).and_return(1)
-      @game.play(2)
+      @game.play(1)
 
       expect(@player.health).to eq(@initial_health - 10)
     end
   end
-
 end
