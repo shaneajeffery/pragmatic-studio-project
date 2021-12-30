@@ -2,16 +2,27 @@ class Player
   def initialize(name, health = 100)
     @name = name.capitalize
     @health = health
+    @found_treasures = Hash.new(0)
   end
 
   attr_accessor :name, :health
 
+  def found_treasure(treasure)
+    @found_treasures[treasure.name] += treasure.points
+    puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."
+    puts "#{@name}'s treasures: #{@found_treasures}"
+  end
+
+  def points
+    @found_treasures.values.reduce(0, :+)
+  end
+
   def score
-    @health + @name.length
+    @health + points
   end
 
   def to_s
-    "#{@name} | Health: #{@health} | Score: #{score}"
+    "#{@name} | Health: #{@health} | Points: #{points} | Score: #{score}"
   end
 
   def strong?

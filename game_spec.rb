@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'game'
 require_relative 'player'
 require_relative 'die'
@@ -37,5 +39,19 @@ describe Game do
 
       expect(@player.health).to eq(@initial_health - 10)
     end
+  end
+
+  it "assigns a treasure for points during a player's turn" do
+    game = Game.new('Knuckleheads')
+    player = Player.new('moe')
+
+    game.add_player(player)
+
+    game.play(1)
+
+    player.points.should_not be_zero
+
+    # or use alternate expectation syntax:
+    # expect(player.points).not_to be_zero
   end
 end
