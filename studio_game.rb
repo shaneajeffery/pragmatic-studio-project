@@ -2,9 +2,17 @@
 
 require_relative 'player'
 require_relative 'game'
+require_relative 'clumsy_player'
+require_relative 'berserk_player'
 
 knuckleheads = Game.new('Knuckleheads')
 knuckleheads.load(ARGV.shift || 'players.csv')
+
+klutz = ClumsyPlayer.new('klutz', 105)
+knuckleheads.add_player(klutz)
+
+berserker = BerserkPlayer.new('berserker', 50)
+knuckleheads.add_player(berserker)
 
 loop do
   puts "\nHow many rounds for the game? ('quit' to exist)"
@@ -22,11 +30,6 @@ loop do
 end
 
 knuckleheads.save
-
-
-
-
-
 
 # knuckleheads.play(3)
 # knuckleheads.print_stats
