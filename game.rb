@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'player'
 require_relative 'die'
 require_relative 'game_turn'
@@ -7,6 +9,20 @@ class Game
   def initialize(title)
     @title = title
     @players = []
+  end
+
+  def load(from_file)
+    File.readlines(from_file).each do |line|
+      add_player(Player.from_csv(line))
+    end
+  end
+
+  def save(to_file = 'player_high_scores.csv')
+    File.open(to_file, 'w') do |file|
+      @players.sort_by { |p| -p.score }.each do |player|
+        file.puts player.to_csv
+      end
+    end
   end
 
   def add_player(player)

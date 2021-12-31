@@ -32,6 +32,15 @@ class Player
     "#{@name} | Health: #{@health} | Points: #{points} | Score: #{score}"
   end
 
+  def self.from_csv(line)
+    name, health = line.split(',')
+    Player.new(name, Integer(health))
+  end
+
+  def to_csv
+    "#{@name},#{score}"
+  end
+
   def strong?
     @health > 100
   end
