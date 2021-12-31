@@ -7,6 +7,13 @@ class Player
 
   attr_accessor :name, :health
 
+  def each_found_treasure
+    @found_treasures.each do |name, points|
+      treasure = Treasure.new(name, points)
+      yield treasure
+    end
+  end
+
   def found_treasure(treasure)
     @found_treasures[treasure.name] += treasure.points
     puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."

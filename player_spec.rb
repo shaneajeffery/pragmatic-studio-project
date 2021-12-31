@@ -17,7 +17,7 @@ describe Player do
   end
 
   it 'has a string representation' do
-    expect(@player.to_s).to eq('Larry | Health: 150 | Score: 150')
+    expect(@player.to_s).to eq('Larry | Health: 150 | Points: 0 | Score: 150')
   end
 
   it 'increases health by 15 when w00ted' do
@@ -57,6 +57,28 @@ describe Player do
     @player.found_treasure(Treasure.new(:hammer, 50))
 
     @player.score.should == 250
+  end
+
+  it "yields each found treasure and its total points" do
+    @player.found_treasure(Treasure.new(:skillet, 100))
+    @player.found_treasure(Treasure.new(:skillet, 100))
+    @player.found_treasure(Treasure.new(:hammer, 50))
+    @player.found_treasure(Treasure.new(:bottle, 5))
+    @player.found_treasure(Treasure.new(:bottle, 5))
+    @player.found_treasure(Treasure.new(:bottle, 5))
+    @player.found_treasure(Treasure.new(:bottle, 5))
+    @player.found_treasure(Treasure.new(:bottle, 5))
+
+    yielded = []
+    @player.each_found_treasure do |treasure|
+      yielded << treasure
+    end
+
+    yielded.should == [
+      Treasure.new(:skillet, 200),
+      Treasure.new(:hammer, 50),
+      Treasure.new(:bottle, 25)
+    ]
   end
 
   context 'created with a default health' do
