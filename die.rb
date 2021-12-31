@@ -1,4 +1,8 @@
+require_relative 'auditable'
+
 class Die
+  include Auditable
+
   attr_reader :number
 
   def initialize
@@ -7,5 +11,6 @@ class Die
 
   def roll
     @number = rand(1..6)
+    audit
   end
 end

@@ -1,4 +1,8 @@
+require_relative 'playable'
+
 class Player
+  include Playable
+
   attr_accessor :name, :health
 
   def initialize(name, health = 100)
@@ -41,17 +45,5 @@ class Player
     "#{@name},#{score}"
   end
 
-  def strong?
-    @health > 100
-  end
 
-  def blam
-    @health -= 10
-    puts "#{@name} got blammed!"
-  end
-
-  def w00t
-    @health += 15
-    puts "#{@name} got w00ted!"
-  end
 end
